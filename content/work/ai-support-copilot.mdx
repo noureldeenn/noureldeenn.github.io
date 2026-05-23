@@ -1,0 +1,27 @@
+# Problem
+
+A B2B SaaS platform was drowning in support volume. Their five-person team was triaging 400+ tickets a week, with median first-response time creeping past four hours. The product had years of well-written docs and a deep ticket history, but agents kept re-answering the same questions from scratch because nothing surfaced the right context at the right moment.
+
+They didn't want to replace the humans. They wanted to give the humans a first draft.
+
+## Approach
+
+We built an internal copilot that drafts a grounded reply the moment a ticket lands.
+
+- **Indexed the corpus** — product docs, release notes, and three years of resolved tickets — into Pinecone with hybrid retrieval (BM25 + dense vectors) so both keyword and semantic matches surface.
+- **Wrapped Claude in a tight system prompt** with the company's voice guide, escalation rules, and a strict "cite or refuse" policy — every claim links back to a doc or prior ticket.
+- **Wired into their existing helpdesk** via webhook — the copilot drafts the reply directly into the agent's compose box, never sending autonomously.
+- **Added a feedback loop** — agents thumb up / down each draft, and rejected drafts feed a weekly review queue so we tune retrieval and prompts on real failure modes.
+- **Built an eval harness** that replays a held-out set of 200 historical tickets on every prompt change, catching regressions before they ship.
+
+Five weeks from kickoff to production. Agents kept full editorial control.
+
+## Outcome
+
+- **First-response time down 62%** (4h 10m → 1h 35m median)
+- **78% of drafts accepted with light edits**, 14% accepted as-written
+- **Ticket volume per agent up 2.3×** without overtime
+- **CSAT held steady at 4.7/5** — quality didn't slip when speed went up
+- **Eval harness caught two prompt regressions** before they reached production
+
+The team has since extended the same pattern to onboarding emails and proactive churn outreach.

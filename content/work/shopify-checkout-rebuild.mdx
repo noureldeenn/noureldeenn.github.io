@@ -1,0 +1,28 @@
+# Problem
+
+A direct-to-consumer beauty brand was bleeding revenue at checkout. Their Shopify theme had been forked, patched, and bolted onto across two years. Mobile checkout was throwing layout shifts, payment radio buttons were unclickable on smaller devices, and the cart drawer froze for 4+ seconds after applying discount codes. Conversion had dropped 9 percent quarter-over-quarter.
+
+The brand had tried a generic theme refresh. It looked nicer but didn&apos;t move the numbers. They needed someone to fix the fundamentals.
+
+## Approach
+
+We started with hard data. Two weeks of session replays revealed the real failure points — most of which were invisible in standard analytics:
+
+- **Replaced the cart drawer** with a server-rendered partial that hydrates only on interaction. Removed three legacy jQuery plugins in the process.
+- **Refactored the checkout extensions** to use Shopify Checkout UI Extensions properly, eliminating a custom script that was blocking the payment step.
+- **Cut 220 KB** of unused theme JavaScript by auditing every `<script>` tag against actual call sites.
+- **Added Stripe Payment Request Button** for Apple Pay and Google Pay — visible by default, not buried behind a "more options" toggle.
+- **Implemented progressive image loading** for the cart line items, so the drawer renders instantly even on slow connections.
+
+We shipped to 50 percent traffic first, watched the data for 4 days, then ramped to 100 percent.
+
+## Outcome
+
+Over the 30 days following full rollout, the rebuilt checkout produced:
+
+- **+14% checkout-to-purchase conversion** vs. the previous 30-day baseline
+- **Mobile bounce rate down 22%** on the cart page
+- **TTI improved from 4.8s to 1.2s** on mobile (Lighthouse)
+- **Apple Pay adoption hit 31%** of mobile transactions — previously 4%
+
+The brand has since added a second store on the same architecture.

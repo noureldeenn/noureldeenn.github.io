@@ -1,0 +1,26 @@
+# Problem
+
+A Series-A SaaS startup had launched on a Webflow site that no longer fit their growth stage. Their content team couldn&apos;t ship articles fast enough, page speeds were tanking SEO rankings, and the marketing site couldn&apos;t share components with their in-app pages. They were burning $2,800 per month on Webflow plans plus contractor fees for every new template.
+
+The team needed a real engineering foundation — fast pages, a proper CMS for non-technical editors, and shared design tokens with the product UI.
+
+## Approach
+
+We rebuilt the marketing site from scratch on Next.js with Sanity as the headless CMS. The migration ran in parallel with the live Webflow site so nothing went down.
+
+- **Designed a token system** in CSS variables that the product team could later adopt for in-app pages.
+- **Modeled content in Sanity** with first-class support for hero variants, pricing tables, customer logos, and embedded case studies — all editable without engineering.
+- **Built a typed content layer** between Sanity and Next.js so editors can&apos;t accidentally publish broken pages.
+- **Implemented ISR** on every public route — content changes go live within 60 seconds without rebuilds.
+- **Set up Vercel preview branches** so marketing can review changes in production-identical environments before they go live.
+
+The handoff included a 14-page Notion playbook for the content team so they don&apos;t need engineering for routine updates.
+
+## Outcome
+
+- **Lighthouse 98** average across all marketing pages (was 64 on Webflow)
+- **First Contentful Paint dropped from 2.1s to 0.4s**
+- **Marketing now ships content independently** — first three articles published with zero engineering involvement
+- **$2,800/month Webflow + contractor cost eliminated**
+
+Six months later the in-app dashboard adopted the same token system, so the brand finally feels coherent across surfaces.

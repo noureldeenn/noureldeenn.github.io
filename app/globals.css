@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #111110;
+  --color-paper: #e8e4d9;
+  --color-paper-dim: #a8a39a;
+  --color-rule: #1f1d1a;
+  --color-ember: #ff5a1f;
+  --color-ember-dim: #7a2c0f;
+
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code",
+    "SF Mono", Menlo, monospace;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-ember);
+    color: var(--color-ink);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+.container-page {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 5vw;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 7vw;
+  }
+}
+
+@keyframes ember-pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.6);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0 4px rgba(255, 90, 31, 0);
+  }
+}
+
+.ember-dot {
+  animation: ember-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
