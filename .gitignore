@@ -33,3 +33,10 @@ next-env.d.ts
 
 # superpowers (brainstorm companion / specs are kept under docs/)
 .superpowers/
+
+# local-only tooling — never commit, never deploy
+/app/tools/
+/components/site/outreach-builder.tsx
+
+# playwright mcp scratch dir
+.playwright-mcp/
