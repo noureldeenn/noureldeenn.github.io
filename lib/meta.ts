@@ -3,7 +3,7 @@ export const siteMeta = {
   title: "Nour Badr — Independent developer building digital products",
   description:
     "Full-stack web development. Next.js apps, Shopify and Zid storefronts, AI agents, and healthcare platforms. Booking Q3 2026.",
-  url: "https://nour-badr.netlify.app",
+  url: "https://nourbadr.netlify.app",
   email: "nourbadr4646@gmail.com",
   social: {
     linkedin: "https://www.linkedin.com/in/nour-badr-201794155/",
