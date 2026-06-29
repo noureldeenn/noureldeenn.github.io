@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/work";
 import { siteMeta } from "@/lib/meta";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteMeta.url;
   return [

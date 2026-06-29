@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { siteMeta } from "@/lib/meta";
 
+export const dynamic = "force-static";
 export const alt = siteMeta.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
