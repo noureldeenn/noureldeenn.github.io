@@ -2,6 +2,8 @@
 
 Independent developer portfolio. Built with Next.js 15, Tailwind v4, Motion, and MDX.
 
+Live: **[noureldeenn.github.io](https://noureldeenn.github.io/)** (primary) — also mirrored on Netlify.
+
 ## Quick start
 
 ```bash
@@ -32,8 +34,10 @@ portfolio/
 │   ├── meta.ts                   # Site metadata, contact, booking URL
 │   └── work.ts                   # Case study frontmatter + helpers
 ├── mdx-components.tsx            # Global MDX component overrides
-├── netlify.toml                  # Netlify build config
-└── next.config.mjs               # MDX integration
+├── .github/workflows/deploy.yml  # GitHub Pages build + deploy
+├── public/.nojekyll              # Stops Pages stripping Next's _next/ assets
+├── netlify.toml                  # Netlify static-host config (mirror)
+└── next.config.mjs               # MDX + static export (output: "export")
 ```
 
 ## Editing content
@@ -73,20 +77,35 @@ Edit `@theme` block at the top of [app/globals.css](app/globals.css). Tokens:
 Fonts load via `next/font/google` in [app/layout.tsx](app/layout.tsx). Swap the
 imports to change typography globally.
 
-## Deploy to Netlify
+## Deploy
 
-1. Initialize git and push to a private GitHub repo.
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial portfolio"
-   git remote add origin <your-repo-url>
-   git push -u origin main
-   ```
-2. Connect the repo at [app.netlify.com](https://app.netlify.com).
-3. Netlify auto-detects Next.js and installs `@netlify/plugin-nextjs`.
-4. First deploy takes ~2 minutes. You get a free `<random>.netlify.app` URL.
-5. Optional: add a custom domain (free, point your `.com` at Netlify's DNS).
+The site is a **static export** (`output: "export"` in `next.config.mjs`),
+so `npm run build` emits a fully static `out/` folder that any static host
+can serve.
+
+### GitHub Pages (primary)
+
+Deploys automatically on every push to `main` via
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml).
+
+One-time setup:
+
+1. Repo must be named `<user>.github.io` (served at root) and **public**.
+2. Settings → **Pages** → Build and deployment → **Source: GitHub Actions**.
+3. Push to `main` — the workflow builds and publishes to
+   `https://<user>.github.io/`.
+
+No further steps; subsequent pushes redeploy on their own.
+
+### Netlify (mirror)
+
+[netlify.toml](netlify.toml) builds with `npm run build` and publishes the
+static `out/` directory. Connect the repo at
+[app.netlify.com](https://app.netlify.com) — no Next.js runtime plugin is
+needed for a static export.
+
+> SEO canonical points at GitHub Pages (see `siteMeta.url` in
+> [lib/meta.ts](lib/meta.ts)), so the Netlify mirror defers to it.
 
 No environment variables are required for v1.
 
@@ -116,7 +135,8 @@ the most common culprits are:
 | Animation | Motion (formerly Framer Motion) |
 | Content | MDX via `@next/mdx` |
 | Fonts | next/font/google: JetBrains Mono + Geist + Instrument Serif |
-| Deploy | Netlify (free tier) |
+| Output | Static export (`output: "export"`) |
+| Deploy | GitHub Pages (primary) + Netlify (mirror) |
 | Language | TypeScript |
 
 ## Updating the booking link
