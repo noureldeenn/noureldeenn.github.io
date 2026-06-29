@@ -86,7 +86,7 @@ export default async function OpengraphImage() {
             paddingTop: "32px",
           }}
         >
-          <div>nourbadr.netlify.app</div>
+          <div>noureldeenn.github.io</div>
           <div style={{ display: "flex", gap: "32px" }}>
             <div>Next.js</div>
             <div style={{ color: "#ff5a1f" }}>·</div>
